@@ -1,5 +1,5 @@
 // วาง URL ของ Web App จาก Google Apps Script ที่ได้ทำการ Deploy แล้วตรงนี้
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwnayWOPhggvjwwD9_uUzk3YHDqcOQP3_HVfswAJkI_u-uGgEJ-OA2Fxh4L97FE8hbJvA/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKjVbPHZaS8VnXv_3wyuUK2ztUXUksLNJXClqklD3entmqJnwtqUAQxGX9ZcXGjejE3A/exec';
 
 let state = {
     teacherPin: '',
