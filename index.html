@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบสอบออนไลน์ (Anti-Cheat)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- หน้า 1: เลือกระบบ (Role Selection) -->
+    <div id="role-selection" class="container">
+        <h1>ระบบข้อสอบออนไลน์</h1>
+        <p>กรุณาเลือกระบบที่ต้องการเข้าใช้งาน</p>
+        <div class="role-buttons">
+            <button onclick="showScreen('student-login')" class="btn-primary">👨‍🎓 สำหรับนักเรียน (ทำข้อสอบ)</button>
+            <button onclick="showScreen('teacher-login')" class="btn-secondary">👨‍🏫 สำหรับครูผู้สอน (จัดการ)</button>
+        </div>
+    </div>
+
+    <!-- หน้า 2: โหมดนักเรียน - ลงทะเบียน -->
+    <div id="student-login" class="container hidden">
+        <h2>ข้อมูลนักเรียน</h2>
+        <input type="text" id="std-name" placeholder="ชื่อ - นามสกุล" required>
+        <input type="text" id="std-room" placeholder="ห้อง (เช่น ม.2/1)" required>
+        <input type="number" id="std-number" placeholder="เลขที่" required>
+        <button onclick="prepareExam()" class="btn-primary">เริ่มทำข้อสอบ</button>
+        <button onclick="showScreen('role-selection')" class="btn-text">กลับหน้าหลัก</button>
+    </div>
+
+    <!-- หน้า 3: โหมดนักเรียน - ทำข้อสอบ -->
+    <div id="exam-portal" class="container exam-container hidden">
+        <div class="exam-header">
+            <span id="question-counter">ข้อ 1 / 10</span>
+            <span id="timer">เวลา: <span id="time-left">0</span> วิ</span>
+        </div>
+        <h3 id="question-text">โจทย์คำถาม...</h3>
+        <div class="options-container" id="options-container">
+            <!-- ตัวเลือกโผล่ที่นี่ -->
+        </div>
+    </div>
+
+    <!-- หน้า 4: โหมดนักเรียน - สรุปผล -->
+    <div id="result-screen" class="container hidden">
+        <h2>ส่งข้อสอบสำเร็จ!</h2>
+        <div class="score-card" id="score-display">-- / --</div>
+        <p id="status-display"></p>
+        <button onclick="location.reload()" class="btn-secondary">กลับสู่หน้าแรก</button>
+    </div>
+
+    <!-- หน้า 5: โหมดครู - ใส่รหัสผ่าน -->
+    <div id="teacher-login" class="container hidden">
+        <h2>Teacher Portal</h2>
+        <input type="password" id="teacher-pin" placeholder="ใส่รหัสผ่าน (PIN)" required>
+        <button onclick="loginTeacher()" class="btn-primary">เข้าสู่ระบบ</button>
+        <button onclick="showScreen('role-selection')" class="btn-text">กลับหน้าหลัก</button>
+    </div>
+
+    <!-- หน้า 6: โหมดครู - จัดการข้อสอบ -->
+    <div id="teacher-dashboard" class="container dashboard hidden">
+        <div class="dash-header">
+            <h2>จัดการข้อสอบ</h2>
+            <button onclick="showQuestionForm()" class="btn-primary">+ เพิ่มข้อสอบ</button>
+        </div>
+        
+        <!-- ฟอร์มเพิ่ม/แก้ไข (ซ่อนไว้เริ่มต้น) -->
+        <div id="question-form-modal" class="form-card hidden">
+            <h3 id="form-title">เพิ่ม/แก้ไขข้อสอบ</h3>
+            <input type="hidden" id="q-id">
+            <textarea id="q-text" placeholder="โจทย์คำถาม..."></textarea>
+            <input type="text" id="q-opt0" placeholder="ตัวเลือก A">
+            <input type="text" id="q-opt1" placeholder="ตัวเลือก B">
+            <input type="text" id="q-opt2" placeholder="ตัวเลือก C">
+            <input type="text" id="q-opt3" placeholder="ตัวเลือก D">
+            
+            <div class="form-row">
+                <select id="q-correct">
+                    <option value="0">เฉลย A</option>
+                    <option value="1">เฉลย B</option>
+                    <option value="2">เฉลย C</option>
+                    <option value="3">เฉลย D</option>
+                </select>
+                <input type="number" id="q-time" placeholder="เวลา (วินาที)" value="30">
+            </div>
+            
+            <button onclick="saveQuestion()" class="btn-primary">บันทึก</button>
+            <button onclick="hideQuestionForm()" class="btn-secondary">ยกเลิก</button>
+        </div>
+
+        <div id="question-list">
+            <p>กำลังโหลดข้อมูล...</p>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading" class="overlay hidden">กำลังประมวลผล...</div>
+
+    <!-- Anti-Cheat Overlay (ซ่อนตัวเวลานักเรียนโกง) -->
+    <div id="cheat-warning" class="overlay warning-overlay hidden">
+        <h1 id="warning-text">⚠️ ตรวจพบการสลับหน้าจอ!</h1>
+        <button onclick="document.getElementById('cheat-warning').classList.add('hidden')" class="btn-primary">รับทราบ (กลับสู่ข้อสอบ)</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

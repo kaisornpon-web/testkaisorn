@@ -1,0 +1,86 @@
+:root {
+    --primary: #4F46E5;
+    --primary-hover: #4338ca;
+    --secondary: #E5E7EB;
+    --secondary-hover: #D1D5DB;
+    --danger: #EF4444;
+    --text: #1F2937;
+    --bg: #F3F4F6;
+}
+
+body {
+    font-family: 'Sarabun', -apple-system, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.container.dashboard { max-width: 800px; text-align: left; }
+.hidden { display: none !important; }
+
+h1, h2, h3 { margin-top: 0; color: var(--text); }
+
+input, textarea, select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+textarea { height: 80px; resize: none; }
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-secondary { background: var(--secondary); color: var(--text); }
+.btn-secondary:hover { background: var(--secondary-hover); }
+.btn-danger { background: var(--danger); color: white; }
+.btn-text { background: transparent; color: #6b7280; font-weight: normal; }
+
+.role-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 2rem; }
+
+/* โหมดสอบ */
+.exam-header { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--bg); }
+.options-container button { text-align: left; background: #f9fafb; border: 1px solid #e5e7eb; color: var(--text); padding: 1rem; }
+.options-container button:hover { background: #e0e7ff; border-color: var(--primary); }
+
+/* โหมดครู */
+.dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.dash-header button { width: auto; margin: 0; }
+.form-card { background: #f8fafc; padding: 1.5rem; border-radius: 8px; border: 1px solid #cbd5e1; margin-bottom: 1.5rem; }
+.form-row { display: flex; gap: 10px; }
+.q-item { background: white; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+.q-actions button { width: auto; padding: 0.4rem 0.8rem; font-size: 0.9rem; margin-bottom: 0; }
+
+/* Overlay Status */
+.overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; font-size: 1.5rem; }
+.warning-overlay { background: rgba(220, 38, 38, 0.95); text-align: center; padding: 2rem; }
+.warning-overlay button { width: auto; margin-top: 1rem; }
+.score-card { font-size: 3rem; font-weight: bold; color: var(--primary); margin: 1.5rem 0; }
