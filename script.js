@@ -29,6 +29,9 @@ async function callAPI(payload) {
     try {
         const response = await fetch(SCRIPT_URL, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8',
+            },
             body: JSON.stringify(payload)
         });
         const result = await response.json();
@@ -36,8 +39,8 @@ async function callAPI(payload) {
         return result;
     } catch (error) {
         showLoading(false);
-        alert('เกิดข้อผิดพลาดในการเชื่อมต่อระบบ');
-        console.error(error);
+        console.error('API Error Details:', error);
+        alert('เกิดข้อผิดพลาดในการเชื่อมต่อระบบ:\n' + error.message + '\n\nกรุณาตรวจเช็กสิทธิ์ Authorization ใน Apps Script หรือ SCRIPT_URL');
         return null;
     }
 }
